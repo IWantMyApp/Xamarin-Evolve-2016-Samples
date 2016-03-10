@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="io.jimbobbennett.edddystonetest">
+	<uses-sdk android:minSdkVersion="21" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<application android:allowBackup="true" android:icon="@mipmap/icon" android:label="@string/app_name" android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+		<meta-data android:name="com.google.android.nearby.messages.API_KEY" 
+		android:value="YourAPIKeyGoesHere" />
+	</application>
+	<service android:name=".BackgroundSubscribeIntentService" android:exported="false" />
+</manifest>
