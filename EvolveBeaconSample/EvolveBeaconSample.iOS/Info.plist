@@ -43,7 +43,5 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Get coffee at Evolve</string>
 </dict>
 </plist>

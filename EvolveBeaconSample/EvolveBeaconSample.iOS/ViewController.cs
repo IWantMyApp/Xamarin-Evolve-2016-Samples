@@ -29,22 +29,7 @@ namespace EvolveBeaconSample.iOS
 		public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            LocationManager.DidRangeBeacons += OnRangeBeacons;
-        }
 
-        void OnRangeBeacons (object sender, CLRegionBeaconsRangedEventArgs e)
-        {
-			var foundBeacon = e.Beacons.FirstOrDefault();
-			if (foundBeacon == null)
-			{
-				DistanceLabel.Text = "";
-				View.BackgroundColor = UIColor.White;
-			}
-			else if (foundBeacon.Accuracy >= 0)
-			{
-				DistanceLabel.Text = $"Distance to coffee\n{foundBeacon.Accuracy:N1}m";
-				View.BackgroundColor = ColorFromDistance(foundBeacon.Accuracy);
-			}
         }
     }
 }

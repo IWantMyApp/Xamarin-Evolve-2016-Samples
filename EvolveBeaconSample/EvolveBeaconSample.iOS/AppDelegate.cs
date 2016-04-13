@@ -38,32 +38,12 @@ namespace EvolveBeaconSample.iOS
 
 		private static readonly NSUuid _regionUuid = new NSUuid("569A17A9-5530-9E0B-4600-EA198EA3EF80");
 
-        public CLLocationManager LocationManager { get; private set; }
-
         public override bool FinishedLaunching(UIApplication application, 
 			NSDictionary launchOptions)
         {
             RegisterNotifications();
 
-			LocationManager = new CLLocationManager();
-
-			LocationManager.AuthorizationChanged += BeaconAuthorizationChanged;
-            LocationManager.RequestAlwaysAuthorization();
-
             return true;
         }
-
-		private void BeaconAuthorizationChanged(object sender, CLAuthorizationChangedEventArgs args)
-		{
-			if (args.Status != CLAuthorizationStatus.AuthorizedAlways) return;
-
-			LocationManager.RegionEntered += (s, e) => SendEnterNotification();
-			LocationManager.RegionLeft += (s, e) => SendExitNotification();
-
-			var beaconRegion = new CLBeaconRegion(_regionUuid, "Evolve Coffee");
-				
-			LocationManager.StartMonitoring(beaconRegion);
-			LocationManager.StartRangingBeacons(beaconRegion);
-		}
     }
 }
