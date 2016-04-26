@@ -36,7 +36,8 @@ namespace EvolveBeaconSample.iOS
 
         #endregion
 
-		private static readonly NSUuid _regionUuid = new NSUuid("569A17A9-5530-9E0B-4600-EA198EA3EF80");
+		private static NSUuid _regionUuid => 
+			new NSUuid("569A17A9-5530-9E0B-4600-EA198EA3EF80");
 
         public override bool FinishedLaunching(UIApplication application, 
 			NSDictionary launchOptions)

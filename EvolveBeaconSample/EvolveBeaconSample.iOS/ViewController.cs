@@ -1,4 +1,5 @@
 ﻿using System;
+using Foundation;
 using UIKit;
 using CoreLocation;
 using System.Linq;
@@ -23,13 +24,15 @@ namespace EvolveBeaconSample.iOS
 		}
 #endregion
 
+		private static NSUuid _regionUuid => 
+			new NSUuid("8F4010DC-D398-4B52-943A-56B31A91C409");
+
 		private CLLocationManager LocationManager => 
 			((AppDelegate)UIApplication.SharedApplication.Delegate).LocationManager;
 
 		public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
         }
     }
 }
