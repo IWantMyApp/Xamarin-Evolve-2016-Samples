@@ -39,10 +39,28 @@ namespace EvolveBeaconSample.iOS
 		private static NSUuid _regionUuid => 
 			new NSUuid("569A17A9-5530-9E0B-4600-EA198EA3EF80");
 
+		internal CLLocationManager LocationManager {get; private set;}
+
         public override bool FinishedLaunching(UIApplication application, 
 			NSDictionary launchOptions)
         {
             RegisterNotifications();
+
+			LocationManager = new CLLocationManager();
+
+			LocationManager.AuthorizationChanged += (s, e) =>
+			{
+				if (e.Status != CLAuthorizationStatus.AuthorizedAlways) return;
+
+				var region = new CLBeaconRegion(_regionUuid, "Evolve Region");
+
+				LocationManager.RegionEntered += (s1, e1) => SendEnterNotification();
+				LocationManager.RegionLeft += (s1, e1) => SendExitNotification();
+
+				LocationManager.StartMonitoring(region);
+			};
+
+			LocationManager.RequestAlwaysAuthorization();
 
             return true;
         }

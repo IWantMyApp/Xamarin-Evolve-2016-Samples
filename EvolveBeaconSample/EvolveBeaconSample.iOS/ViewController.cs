@@ -33,6 +33,25 @@ namespace EvolveBeaconSample.iOS
 		public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+			LocationManager.DidRangeBeacons += (s, e) =>
+			{
+				var first = e.Beacons.FirstOrDefault();
+				if (first == null)
+				{
+					View.BackgroundColor = UIColor.White;
+					DistanceLabel.Text = "";
+				}
+				else if (first.Accuracy >= 0)
+				{
+					View.BackgroundColor = ColorFromDistance(first.Accuracy);
+					DistanceLabel.Text = $"Distance to coffee\n{first.Accuracy:N1}m";
+				}
+			};
+
+			var region = new CLBeaconRegion(_regionUuid, "EvolveRanging");
+
+			LocationManager.StartRangingBeacons(region);
         }
     }
 }
